@@ -1,0 +1,22 @@
+@import '../variables/fonts';
+
+@mixin small-text() {
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 12px;
+	font-family: $main-font;
+}
+
+@mixin regular-text() {
+	font-weight: 500;
+	font-size: 22px;
+	line-height: 34px;
+	font-family: $main-font;
+}
+
+@mixin bold-text() {
+	font-weight: 700;
+	font-size: 30px;
+	line-height: 36px;
+	font-family: $main-font;
+}

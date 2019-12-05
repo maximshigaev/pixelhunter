@@ -1,0 +1,24 @@
+/*
+ * Стили для кнопки-звёздочки
+ */
+
+@import '../variables/colors';
+
+.asterisk {
+	padding: 0;
+	border: none;
+
+	background: transparent;
+	cursor: pointer;
+
+	color: $main-red-color;
+
+	&:hover,
+	&:focus {
+		color: $link-hover-color;
+	}
+
+	&:active {
+		color: $link-active-color;
+	}
+}

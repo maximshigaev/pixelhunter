@@ -1,0 +1,94 @@
+@import 'variables/colors';
+@import 'mixins/text';
+
+@font-face {
+	font-style: normal;
+	font-weight: 400;
+	font-family: 'Roboto';
+
+	font-display: swap;
+	src: url('../fonts/roboto.woff2') format('woff2'),
+		url('../fonts/roboto.woff') format('woff');
+}
+
+@font-face {
+	font-style: normal;
+	font-weight: 500;
+	font-family: 'Roboto';
+
+	font-display: swap;
+	src: url('../fonts/robotomedium.woff2') format('woff2'),
+		url('../fonts/robotomedium.woff') format('woff');
+}
+
+@font-face {
+	font-style: normal;
+	font-weight: 700;
+	font-family: 'Roboto';
+
+	font-display: swap;
+	src: url('../fonts/robotobold.woff2') format('woff2'),
+		url('../fonts/robotobold.woff') format('woff');
+}
+
+html {
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	min-height: 100%;
+
+	background: #a8c8c4 linear-gradient(to bottom left, #ccdeeb, #84b39e)
+		no-repeat;
+
+	color: $main-font-color;
+
+	@include regular-text;
+}
+
+a {
+	color: $main-font-color;
+}
+
+.back {
+	border: 0;
+
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.visually-hidden {
+	position: absolute;
+
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip-path: inset(100%);
+
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+
+	white-space: nowrap;
+}
+
+@keyframes bounce {
+	0% {
+		transform: translateY(-2000px);
+	}
+
+	70% {
+		transform: translateY(30px);
+	}
+
+	90% {
+		transform: translateY(-10px);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
