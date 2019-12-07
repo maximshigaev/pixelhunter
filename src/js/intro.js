@@ -1,11 +1,20 @@
-import greetingScreen from "./greeting.js";
+import {showGreeting} from "./greeting.js";
+import showScreen from "./showScreen.js";
 
-const introScreen = document.querySelector(`#intro`);
-const introAsterisk = document.querySelector(`.intro__asterisk`);
+function showIntro() {
+	const introScreen = document.querySelector(`#intro`);
 
-introAsterisk.addEventListener(`click`, function () {
-	introScreen.classList.add(`hidden`);
-	greetingScreen.classList.remove(`hidden`);
-});
+	showScreen(introScreen);
 
-export default introScreen;
+	introScreen.classList.remove(`hidden`);
+
+	const introAsterisk = document.querySelector(`.intro__asterisk`);
+
+	introAsterisk.addEventListener(`click`, function () {
+		showGreeting();
+
+		introScreen.classList.add(`hidden`);
+	});
+}
+
+export default showIntro;

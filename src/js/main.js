@@ -1,32 +1,17 @@
-import showScreen from "./showScreen.js";
-import introScreen from "./intro.js";
-import greetingScreen from "./greeting.js";
+import showIntro from "./intro.js";
+import {greetingScreen} from "./greeting.js";
+import showScreen from "./showScreen";
 
 function main() {
-	const mainContent = document.querySelector(`#main`);
+	showIntro();
+}
 
-	showScreen(introScreen);
+function returnGreeting() {
+	document.querySelector(`.back`).addEventListener(`click`, function () {
+		showScreen(greetingScreen);
 
-	function hideScreens() {
-		const screens = Array.from(mainContent.children);
-
-		screens.forEach((screen) => {
-			screen.classList.add(`hidden`);
-		});
-	}
-
-	hideScreens();
-
-	introScreen.classList.remove(`hidden`);
-
-	const backButtons = document.querySelectorAll(`.back`);
-
-	backButtons.forEach((backButton) => {
-		backButton.addEventListener(`click`, function () {
-			hideScreens();
-			greetingScreen.classList.remove(`hidden`);
-		});
+		greetingScreen.classList.remove(`hidden`);
 	});
 }
 
-export default main;
+export {returnGreeting, main};

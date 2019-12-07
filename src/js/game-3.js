@@ -1,6 +1,7 @@
 import createElement from "./createElement.js";
 import showScreen from "./showScreen.js";
-import statsScreen from "./stats.js";
+import showStats from "./stats.js";
+import {returnGreeting} from "./main.js";
 
 const gameThreeScreen = createElement(`<div><header class="header">
 	<button class="back">
@@ -46,15 +47,22 @@ const gameThreeScreen = createElement(`<div><header class="header">
 	</ul>
 	</section></div>`);
 
-showScreen(gameThreeScreen);
+function showgGameThreeScreen() {
+	showScreen(gameThreeScreen);
 
-const gameThreeOptions = gameThreeScreen.querySelectorAll(`.game__option`);
+	gameThreeScreen.classList.remove(`hidden`);
 
-gameThreeOptions.forEach((gameThreeOption) => {
-	gameThreeOption.addEventListener(`click`, function () {
-		gameThreeScreen.classList.add(`hidden`);
-		statsScreen.classList.remove(`hidden`);
+	returnGreeting();
+
+	const gameThreeOptions = gameThreeScreen.querySelectorAll(`.game__option`);
+
+	gameThreeOptions.forEach((gameThreeOption) => {
+		gameThreeOption.addEventListener(`click`, function () {
+			showStats();
+
+			gameThreeScreen.classList.add(`hidden`);
+		});
 	});
-});
+}
 
-export default gameThreeScreen;
+export default showgGameThreeScreen;

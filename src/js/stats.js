@@ -1,5 +1,6 @@
 import createElement from "./createElement.js";
 import showScreen from "./showScreen";
+import {returnGreeting} from "./main.js";
 
 const statsScreen = createElement(`<div><header class="header">
 	<button class="back">
@@ -113,6 +114,12 @@ const statsScreen = createElement(`<div><header class="header">
 	</table>
 	</section></div>`);
 
-showScreen(statsScreen);
+function showStats() {
+	showScreen(statsScreen);
 
-export default statsScreen;
+	statsScreen.classList.remove(`hidden`);
+
+	returnGreeting();
+}
+
+export default showStats;

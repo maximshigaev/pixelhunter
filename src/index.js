@@ -1,12 +1,3 @@
 import style from "./sass/style.scss";
-import createElement from "./js/createElement.js";
-import showScreen from "./js/showScreen.js";
-import main from "./js/main.js";
+import { main } from "./js/main.js";
 main();
-import introScreen from "./js/intro.js";
-import greetingScreen from "./js/greeting.js";
-import rulesScreen from "./js/rules.js";
-import gameOneScreen from "./js/game-1.js";
-import gameTwoScreen from "./js/game-2.js";
-import gameThreeScreen from "./js/game-3.js";
-import statsScreen from "./js/stats.js";

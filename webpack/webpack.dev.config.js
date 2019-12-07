@@ -4,11 +4,11 @@ const baseWebpackConfig = require("./webpack.base.config.js");
 const devWebpackConfig = merge(baseWebpackConfig, {
 	mode: "development",
 	devtool: "cheap-module-eval-source-map",
-	// devServer: {
-	// 	// contentBase: baseWebpackConfig.externals.paths.build,
-	// 	// port: 8081,
-	// 	overlay: true
-	// },
+	devServer: {
+		contentBase: baseWebpackConfig.externals.paths.build,
+		port: 8081,
+		overlay: true
+	},
 	plugins: [
 		new webpack.SourceMapDevToolPlugin({
 			filename: "[file].map"

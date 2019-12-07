@@ -74,10 +74,10 @@ module.exports = {
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/,
 				use: {
-					loader: "file-loader",
+					loader: "url-loader",
 					options: {
 						name: "[name].[ext]",
-						outputPath: `../build/fonts`
+						outputPath: `${PATHS.build}/fonts`
 					}
 				}
 			}
@@ -91,7 +91,8 @@ module.exports = {
 			filename: "css/style.css"
 		}),
 		new CopyWebpackPlugin([
-			{ from: `${PATHS.src}/img`, to: `${PATHS.build}/img` }
+			{ from: `${PATHS.src}/img`, to: `${PATHS.build}/img` },
+			{ from: `${PATHS.src}/fonts`, to: `${PATHS.build}/fonts` }
 		])
 	],
 	resolve: {

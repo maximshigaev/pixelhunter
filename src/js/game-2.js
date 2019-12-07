@@ -1,6 +1,7 @@
 import createElement from "./createElement.js";
 import showScreen from "./showScreen";
-import gameThreeScreen from "./game-3.js";
+import showgGameThreeScreen from "./game-3.js";
+import {returnGreeting} from "./main.js";
 
 const gameTwoScreen = createElement(`<div><header class="header">
 	<button class="back">
@@ -48,15 +49,22 @@ const gameTwoScreen = createElement(`<div><header class="header">
 	</ul>
 	</section></div>`);
 
-showScreen(gameTwoScreen);
+function showgGameTwoScreen() {
+	showScreen(gameTwoScreen);
 
-const gameTwoRadioButtons = gameTwoScreen.querySelectorAll(`input`);
+	gameTwoScreen.classList.remove(`hidden`);
 
-gameTwoRadioButtons.forEach((gameTwoRadioButton) => {
-	gameTwoRadioButton.addEventListener(`change`, function () {
-		gameTwoScreen.classList.add(`hidden`);
-		gameThreeScreen.classList.remove(`hidden`);
+	returnGreeting();
+
+	const gameTwoRadioButtons = gameTwoScreen.querySelectorAll(`input`);
+
+	gameTwoRadioButtons.forEach((gameTwoRadioButton) => {
+		gameTwoRadioButton.addEventListener(`change`, function () {
+			showgGameThreeScreen();
+
+			gameTwoScreen.classList.add(`hidden`);
+		});
 	});
-});
+}
 
-export default gameTwoScreen;
+export default showgGameTwoScreen;

@@ -1,6 +1,7 @@
 import createElement from "./createElement.js";
 import showScreen from "./showScreen";
-import gameTwoScreen from "./game-2.js";
+import showgGameTwoScreen from "./game-2.js";
+import {returnGreeting} from "./main.js";
 
 const gameOneScreen = createElement(`<div><header class="header">
 	<button class="back">
@@ -59,27 +60,34 @@ const gameOneScreen = createElement(`<div><header class="header">
 	</ul>
 	</section></div>`);
 
-showScreen(gameOneScreen);
+function showGameOneScreen() {
+	showScreen(gameOneScreen);
 
-const gameObeRadioButtons = gameOneScreen.querySelectorAll(`input`);
-let isFirstChecked = false;
-let isSecondChecked = false;
+	gameOneScreen.classList.remove(`hidden`);
 
-gameObeRadioButtons.forEach((gameObeRadioButton) => {
-	gameObeRadioButton.addEventListener(`change`, function (e) {
-		if (e.target.name === `question1`) {
-			isFirstChecked = true;
-		}
+	returnGreeting();
 
-		if (e.target.name === `question2`) {
-			isSecondChecked = true;
-		}
+	const gameObeRadioButtons = gameOneScreen.querySelectorAll(`input`);
+	let isFirstChecked = false;
+	let isSecondChecked = false;
 
-		if (isFirstChecked && isSecondChecked) {
-			gameOneScreen.classList.add(`hidden`);
-			gameTwoScreen.classList.remove(`hidden`);
-		}
+	gameObeRadioButtons.forEach((gameObeRadioButton) => {
+		gameObeRadioButton.addEventListener(`change`, function (e) {
+			if (e.target.name === `question1`) {
+				isFirstChecked = true;
+			}
+
+			if (e.target.name === `question2`) {
+				isSecondChecked = true;
+			}
+
+			if (isFirstChecked && isSecondChecked) {
+				showgGameTwoScreen();
+
+				gameOneScreen.classList.add(`hidden`);
+			}
+		});
 	});
-});
+}
 
-export default gameOneScreen;
+export default showGameOneScreen;
