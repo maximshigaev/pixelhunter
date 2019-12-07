@@ -75,6 +75,10 @@ a {
 	white-space: nowrap;
 }
 
+.hidden {
+	display: none;
+}
+
 @keyframes bounce {
 	0% {
 		transform: translateY(-2000px);

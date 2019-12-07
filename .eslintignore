@@ -1,4 +1,6 @@
-webpack.config.js
+webpack.base.config.js
+webpack.dev.config.js
+webpack.prod.config.js
 build
 postcss.config.js
-src/js/index.js
+src/index.js

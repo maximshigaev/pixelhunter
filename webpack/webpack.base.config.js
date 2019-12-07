@@ -1,22 +1,30 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const PATHS = {
+	src: path.join(__dirname, "../src"),
+	build: path.join(__dirname, "../build")
+};
 
 module.exports = {
-	context: path.resolve(__dirname, "src"),
+	context: path.resolve(__dirname, "./src"),
 
-	entry: "./js/index.js",
+	externals: {
+		paths: PATHS
+	},
+
+	entry: {
+		bundle: `${PATHS.src}/index.js`
+	},
 
 	output: {
-		filename: "./js/bundle.js",
-		path: path.resolve(__dirname, "build")
+		filename: "./js/[name].js",
+		path: PATHS.build
 	},
 
 	watch: true,
-
-	devtool: "eval",
 
 	module: {
 		rules: [
@@ -28,25 +36,29 @@ module.exports = {
 			// 		loader: "eslint-loader"
 			// 	}
 			// },
-			// {
-			// 	test: /\.js$/,
-			// 	exclude: /node_modules/,
-			// 	use: {
-			// 		loader: "babel-loader",
-			// 		options: {
-			// 			presets: ["env", "stage-0"]
-			// 		}
-			// 	}
-			// },
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader",
+					options: {
+						presets: ["env", "stage-0"]
+					}
+				}
+			},
 			{
 				test: /\.scss$/,
 				use: [
+					MiniCssExtractPlugin.loader,
 					{
-						loader: MiniCssExtractPlugin.loader
+						loader: "css-loader",
+						options: { sourceMap: true }
 					},
-					"css-loader",
 					"postcss-loader",
-					"sass-loader"
+					{
+						loader: "sass-loader",
+						options: { sourceMap: true }
+					}
 				]
 			},
 			{
@@ -54,9 +66,8 @@ module.exports = {
 				use: {
 					loader: "url-loader",
 					options: {
-						limit: 1000,
 						name: "[name].[ext]",
-						outputPath: "../build/img/"
+						outputPath: `${PATHS.build}/img`
 					}
 				}
 			},
@@ -66,7 +77,7 @@ module.exports = {
 					loader: "file-loader",
 					options: {
 						name: "[name].[ext]",
-						outputPath: "../build/fonts"
+						outputPath: `../build/fonts`
 					}
 				}
 			}
@@ -74,12 +85,14 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "./index.html"
+			template: `${PATHS.src}/index.html`
 		}),
 		new MiniCssExtractPlugin({
 			filename: "css/style.css"
-		})
-		// new WebpackBundleAnalyzer()
+		}),
+		new CopyWebpackPlugin([
+			{ from: `${PATHS.src}/img`, to: `${PATHS.build}/img` }
+		])
 	],
 	resolve: {
 		extensions: [".js", ".json", ".jsx", "*"]
