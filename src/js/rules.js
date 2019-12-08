@@ -1,17 +1,13 @@
 import createElement from "./createElement.js";
 import showScreen from "./showScreen.js";
 import showGameOneScreen from "./game-1.js";
-import {returnGreeting} from "./main.js";
+import { returnGreeting } from "./main.js";
 
 const rulesScreen = createElement(`<div><header class="header">
 	<button class="back">
 		<span class="visually-hidden">Вернуться к началу</span>
-		<svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
-			<use xlink:href="img/sprite.svg#arrow-left"></use>
-		</svg>
-		<svg class="icon" width="101" height="44" viewBox="0 0 101 44" fill="#000000">
-			<use xlink:href="img/sprite.svg#logo-small"></use>
-		</svg>
+		<img src="img/sprite/arrow-left.svg">
+		<img src="img/sprite/logo-small.svg">
 	</button>
 	</header>
 	<section class="rules">
@@ -41,11 +37,11 @@ function showRules() {
 	const nameForm = document.querySelector(`.rules__input`);
 	const nameFormButton = document.querySelector(`.rules__button`);
 
-	nameForm.addEventListener(`input`, function () {
+	nameForm.addEventListener(`input`, function() {
 		nameFormButton.disabled = nameForm.value ? false : true;
 	});
 
-	nameFormButton.addEventListener(`click`, function (e) {
+	nameFormButton.addEventListener(`click`, function(e) {
 		e.preventDefault();
 
 		showGameOneScreen();

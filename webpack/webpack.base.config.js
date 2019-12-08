@@ -81,6 +81,16 @@ module.exports = {
 					}
 				}
 			}
+			// {
+			// 	test: /test\.js$/,
+			// 	use: "mocha-loader",
+			// 	exclude: /node_modules/
+			// }
+			// {
+			// 	test: /\.svg$/,
+			// 	loader: "svg-sprite-loader",
+			// 	include: /.*sprite\.svg/
+			// }
 		]
 	},
 	plugins: [

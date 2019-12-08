@@ -18,9 +18,7 @@ const greetingScreen = createElement(`<div><section class="greeting central--blu
 	</div>
 	<button class="greeting__continue" type="button">
 		<span class="visually-hidden">Продолжить</span>
-		<svg class="icon" width="64" height="64" viewBox="0 0 64 64" fill="#000000">
-			<use xlink:href="img/sprite.svg#arrow-right"></use>
-		</svg>
+		<img src="img/sprite/arrow-right.svg">
 	</button>
 	<button class="greeting__top top" type="button">
 		<img src="img/icon-top.svg" width="71" height="79" alt="Топ игроков">
