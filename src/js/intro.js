@@ -1,4 +1,4 @@
-import {showGreeting} from "./greeting.js";
+import { showGreeting } from "./greeting.js";
 import showScreen from "./showScreen.js";
 
 function showIntro() {
@@ -6,14 +6,10 @@ function showIntro() {
 
 	showScreen(introScreen);
 
-	introScreen.classList.remove(`hidden`);
-
 	const introAsterisk = document.querySelector(`.intro__asterisk`);
 
-	introAsterisk.addEventListener(`click`, function () {
+	introAsterisk.addEventListener(`click`, function() {
 		showGreeting();
-
-		introScreen.classList.add(`hidden`);
 	});
 }
 

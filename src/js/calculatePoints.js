@@ -1,35 +1,36 @@
-function calculatePoints(resultArray, livesNumber) {
+function calculatePoints(answers, livesNumber) {
 	const SAVED_LIVE_BONUS = 50;
-	const RIGHT_COMMON_ANSWER_BONUS = 100;
-	const RIGHT_FAST_ANSWER_BONUS = 150;
-	const RIGHT_SLOW_ANSWER_BONUS = 50;
-	const FAST_ANSWER_LIMIT = 10;
-	const SLOW_ANSWER_LIMIT = 20;
-	const TOTAL_NUMBER_OF_QUESTIONS = 10;
-	let totalPoints = 0;
+	const CORRECT_ANSWER_BONUS = 100;
+	const FAST_ANSWER_BONUS = 50;
+	const SLOW_ANSWER_FAIR = -50;
+	const livesBonus = livesNumber * SAVED_LIVE_BONUS;
+	let correctAnswerPoints = 0;
+	let slowAnswersBonus = 0;
+	let fastAnswersBonus = 0;
+	let fastAnswersNumber = 0;
+	let slowAnswersNumber = 0;
 
-	if (resultArray.length < TOTAL_NUMBER_OF_QUESTIONS) {
-		return `Game is not finished`;
-	}
+	answers.forEach((answer) => {
+		switch (answer) {
+		case `fast`:
+			fastAnswersNumber++;
+			fastAnswersBonus += FAST_ANSWER_BONUS;
+			break;
+		case `slow`:
+			slowAnswersNumber++;
+			slowAnswersBonus += SLOW_ANSWER_FAIR;
+			break;
+		}
 
-	resultArray.forEach((result) => {
-		if (result[`answer`]) {
-			if (
-				result[`time`] >= FAST_ANSWER_LIMIT &&
-				result[`time`] <= SLOW_ANSWER_LIMIT
-			) {
-				totalPoints += RIGHT_COMMON_ANSWER_BONUS;
-			} else if (result[`time`] < FAST_ANSWER_LIMIT) {
-				totalPoints += RIGHT_FAST_ANSWER_BONUS;
-			} else if (result[`time`] > SLOW_ANSWER_LIMIT) {
-				totalPoints += RIGHT_SLOW_ANSWER_BONUS;
-			}
+		if (answer !== `wrong`) {
+			correctAnswerPoints += CORRECT_ANSWER_BONUS;
 		}
 	});
 
-	totalPoints += livesNumber * SAVED_LIVE_BONUS;
+	let totalPoints = livesBonus + correctAnswerPoints + fastAnswersBonus - slowAnswersBonus;
+	const stats = { totalPoints, fastAnswersNumber, slowAnswersNumber, livesBonus, livesNumber, fastAnswersBonus, slowAnswersBonus, correctAnswerPoints };
 
-	return totalPoints;
+	return stats;
 }
 
 export default calculatePoints;

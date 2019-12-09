@@ -1,6 +1,12 @@
 {
     "parserOptions": { "ecmaVersion": 6, "sourceType": "module" },
-    "env": { "es6": true, "commonjs": true, "mocha": true },
+    "env": { "es6": true, "commonjs": true, "mocha": true, "browser": true },
     "extends": "htmlacademy/es6",
-    rules: { "indent": ["error", "tab"] },
+    "rules":
+        {
+            "indent": ["error", "tab"],
+            "space-before-function-paren": ["error", "never"],
+			"object-curly-spacing": ["error", "always"],
+			"no-unused-expressions": [2, { "allowTernary": true }]
+        }
 }

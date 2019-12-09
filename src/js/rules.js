@@ -1,7 +1,9 @@
 import createElement from "./createElement.js";
 import showScreen from "./showScreen.js";
-import showGameOneScreen from "./game-1.js";
-import { returnGreeting } from "./main.js";
+import { showGameOneScreen, getGameOneScreenTemplate } from "./game-1.js";
+import { returnGreeting, clearMain } from "./main.js";
+import { showHeader, getHeaderTemplate } from "./header.js";
+import { initialState, answers, QUESTIONS } from "./data.js";
 
 const rulesScreen = createElement(`<div><header class="header">
 	<button class="back">
@@ -28,9 +30,9 @@ const rulesScreen = createElement(`<div><header class="header">
 	</section></div>`);
 
 function showRules() {
-	showScreen(rulesScreen);
+	clearMain();
 
-	rulesScreen.classList.remove(`hidden`);
+	showScreen(rulesScreen);
 
 	returnGreeting();
 
@@ -44,9 +46,12 @@ function showRules() {
 	nameFormButton.addEventListener(`click`, function(e) {
 		e.preventDefault();
 
-		showGameOneScreen();
+		const currentGameState = Object.assign({}, initialState);
+		const firstQuestionElement = createElement(getGameOneScreenTemplate(answers, currentGameState, QUESTIONS));
+		const firstQuestionHeaderElement = createElement(getHeaderTemplate(currentGameState));
 
-		rulesScreen.classList.add(`hidden`);
+		showHeader(firstQuestionHeaderElement);
+		showGameOneScreen(firstQuestionElement, currentGameState);
 	});
 }
 

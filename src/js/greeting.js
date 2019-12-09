@@ -1,8 +1,9 @@
 import createElement from "./createElement.js";
 import showRules from "./rules.js";
 import showScreen from "./showScreen.js";
+import { clearMain } from "./main.js";
 
-const greetingScreen = createElement(`<div><section class="greeting central--blur">
+const greetingScreen = createElement(`<section class="greeting central--blur">
 	<img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
 	<div class="greeting__asterisk asterisk"><span class="visually-hidden">Я просто красивая звёздочка</span>*
 	</div>
@@ -23,19 +24,17 @@ const greetingScreen = createElement(`<div><section class="greeting central--blu
 	<button class="greeting__top top" type="button">
 		<img src="img/icon-top.svg" width="71" height="79" alt="Топ игроков">
 	</button>
-	</section></div>`);
+	</section>`);
 
 function showGreeting() {
-	showScreen(greetingScreen);
+	clearMain();
 
-	greetingScreen.classList.remove(`hidden`);
+	showScreen(greetingScreen);
 
 	const continueButton = document.querySelector(`.greeting__continue`);
 
-	continueButton.addEventListener(`click`, function () {
+	continueButton.addEventListener(`click`, function() {
 		showRules();
-
-		greetingScreen.classList.add(`hidden`);
 	});
 }
-export {showGreeting, greetingScreen};
+export { showGreeting, greetingScreen };
