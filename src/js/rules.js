@@ -1,11 +1,11 @@
 import createElement from "./createElement.js";
 import showScreen from "./showScreen.js";
 import { showGameOneScreen, getGameOneScreenTemplate } from "./game-1.js";
-import { returnGreeting, clearMain } from "./main.js";
+import { returnGreeting } from "./main.js";
 import { showHeader, getHeaderTemplate } from "./header.js";
 import { initialState, answers, QUESTIONS } from "./data.js";
 
-const rulesScreen = createElement(`<div><header class="header">
+const rulesScreen = createElement(`<div class="rules__screen"><header class="header">
 	<button class="back">
 		<span class="visually-hidden">Вернуться к началу</span>
 		<img src="img/sprite/arrow-left.svg">
@@ -30,29 +30,33 @@ const rulesScreen = createElement(`<div><header class="header">
 	</section></div>`);
 
 function showRules() {
-	clearMain();
+	const FADE_TIMEOUT = 2000;
 
-	showScreen(rulesScreen);
+	$(`.greeting`).fadeOut(FADE_TIMEOUT);
 
-	returnGreeting();
+	setTimeout(() => {
+		showScreen(rulesScreen);
 
-	const nameForm = document.querySelector(`.rules__input`);
-	const nameFormButton = document.querySelector(`.rules__button`);
+		returnGreeting();
 
-	nameForm.addEventListener(`input`, function() {
-		nameFormButton.disabled = nameForm.value ? false : true;
-	});
+		const nameForm = document.querySelector(`.rules__input`);
+		const nameFormButton = document.querySelector(`.rules__button`);
 
-	nameFormButton.addEventListener(`click`, function(e) {
-		e.preventDefault();
+		nameForm.addEventListener(`input`, function() {
+			nameFormButton.disabled = nameForm.value ? false : true;
+		});
 
-		const currentGameState = Object.assign({}, initialState);
-		const firstQuestionElement = createElement(getGameOneScreenTemplate(answers, currentGameState, QUESTIONS));
-		const firstQuestionHeaderElement = createElement(getHeaderTemplate(currentGameState));
+		nameFormButton.addEventListener(`click`, function(e) {
+			e.preventDefault();
 
-		showHeader(firstQuestionHeaderElement);
-		showGameOneScreen(firstQuestionElement, currentGameState);
-	});
+			const currentGameState = Object.assign({}, initialState);
+			const firstQuestionElement = createElement(getGameOneScreenTemplate(answers, currentGameState, QUESTIONS));
+			const firstQuestionHeaderElement = createElement(getHeaderTemplate(currentGameState));
+
+			showHeader(firstQuestionHeaderElement);
+			showGameOneScreen(firstQuestionElement, currentGameState);
+		});
+	}, FADE_TIMEOUT);
 }
 
 export default showRules;

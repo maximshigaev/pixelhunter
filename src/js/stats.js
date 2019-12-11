@@ -40,7 +40,7 @@ function getStatsScreenTemplate(userAnswers, stats) {
 				<td class="result__extra">Штраф за медлительность:</td>
 				<td class="result__extra">${stats[`slowAnswersNumber`]} <span class="stats__result stats__result--slow"></span></td>
 				<td class="result__points">× 50</td>
-				<td class="result__total">${stats[`slowAnswersBonus`]}</td>
+				<td class="result__total">${stats[`slowAnswersFair`]}</td>
 			</tr>
 			<tr>
 				<td colspan="5" class="result__total  result__total--final">${stats[`totalPoints`]}</td>

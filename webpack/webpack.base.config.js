@@ -103,7 +103,11 @@ module.exports = {
 		new CopyWebpackPlugin([
 			{ from: `${PATHS.src}/img`, to: `${PATHS.build}/img` },
 			{ from: `${PATHS.src}/fonts`, to: `${PATHS.build}/fonts` }
-		])
+		]),
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery'
+		})
 	],
 	resolve: {
 		extensions: [".js", ".json", ".jsx", "*"]

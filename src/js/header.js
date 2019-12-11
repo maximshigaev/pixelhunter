@@ -1,4 +1,4 @@
-import { returnGreeting, clearMain } from "./main.js";
+import { clearMain } from "./main.js";
 import showScreen from "./showScreen";
 
 function getHeaderTemplate(gameState) {
@@ -26,8 +26,6 @@ function showHeader(headerElement) {
 	clearMain();
 
 	showScreen(headerElement);
-
-	returnGreeting();
 }
 
 export { getHeaderTemplate, showHeader };

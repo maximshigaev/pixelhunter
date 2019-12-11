@@ -2,10 +2,10 @@ function calculatePoints(answers, livesNumber) {
 	const SAVED_LIVE_BONUS = 50;
 	const CORRECT_ANSWER_BONUS = 100;
 	const FAST_ANSWER_BONUS = 50;
-	const SLOW_ANSWER_FAIR = -50;
+	const SLOW_ANSWER_FAIR = 50;
 	const livesBonus = livesNumber * SAVED_LIVE_BONUS;
 	let correctAnswerPoints = 0;
-	let slowAnswersBonus = 0;
+	let slowAnswersFair = 0;
 	let fastAnswersBonus = 0;
 	let fastAnswersNumber = 0;
 	let slowAnswersNumber = 0;
@@ -18,7 +18,7 @@ function calculatePoints(answers, livesNumber) {
 			break;
 		case `slow`:
 			slowAnswersNumber++;
-			slowAnswersBonus += SLOW_ANSWER_FAIR;
+			slowAnswersFair += SLOW_ANSWER_FAIR;
 			break;
 		}
 
@@ -27,8 +27,8 @@ function calculatePoints(answers, livesNumber) {
 		}
 	});
 
-	let totalPoints = livesBonus + correctAnswerPoints + fastAnswersBonus - slowAnswersBonus;
-	const stats = { totalPoints, fastAnswersNumber, slowAnswersNumber, livesBonus, livesNumber, fastAnswersBonus, slowAnswersBonus, correctAnswerPoints };
+	let totalPoints = livesBonus + correctAnswerPoints + fastAnswersBonus - slowAnswersFair;
+	const stats = { totalPoints, fastAnswersNumber, slowAnswersNumber, livesBonus, livesNumber, fastAnswersBonus, slowAnswersFair, correctAnswerPoints };
 
 	return stats;
 }
