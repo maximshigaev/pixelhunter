@@ -8,9 +8,7 @@ function showIntro() {
 
 	const introAsterisk = document.querySelector(`.intro__asterisk`);
 
-	introAsterisk.addEventListener(`click`, function() {
-		showGreeting();
-	});
+	introAsterisk.addEventListener(`click`, showGreeting);
 }
 
 export default showIntro;
