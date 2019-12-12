@@ -22,7 +22,7 @@ class AbstractView {
 
 	render() {
 		let element = document.createElement(`div`);
-		element.innerHTML = this.template();
+		element.innerHTML = this.template;
 
 		return element.firstElementChild;
 	}
