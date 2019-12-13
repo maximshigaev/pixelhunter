@@ -2,9 +2,10 @@ import showScreen from "./showScreen.js";
 import AbstractView from "./abstractView.js";
 import GreetingView from "./greetingView.js";
 import ModalView from "./modalView.js";
+import { gameState } from "./data.js";
 
 class HeaderView extends AbstractView {
-	constructor(gameState) {
+	constructor() {
 		super();
 		this.gameState = gameState;
 	}

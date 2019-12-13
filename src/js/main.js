@@ -1,13 +1,10 @@
-import GreetingView from "./greetingView.js";
-import showScreen from "./showScreen.js";
+import controlGreetingScreen from "./greetingPresenter";
 
 function main() {
 	const introAsterisk = document.querySelector(`.intro__asterisk`);
 
 	introAsterisk.addEventListener(`click`, function() {
-		const greetingView = new GreetingView();
-
-		showScreen(greetingView.element);
+		controlGreetingScreen();
 	});
 }
 

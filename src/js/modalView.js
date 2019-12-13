@@ -1,7 +1,4 @@
-import showScreen from "./showScreen.js";
 import AbstractView from "./abstractView.js";
-import GreetingView from "./greetingView.js";
-import { answers } from "./data.js";
 
 class ModalView extends AbstractView {
 	constructor() {
@@ -14,17 +11,9 @@ class ModalView extends AbstractView {
 		return modalConfirm.outerHTML;
 	}
 
-	onOkClick() {
-		const greetingView = new GreetingView();
+	onOkClick() { }
 
-		answers.fill(`unknown`);
-
-		showScreen(greetingView.element);
-	}
-
-	onCancelClick() {
-		document.querySelector(`.modal`).remove();
-	}
+	onCancelClick() { }
 
 	bind() {
 		const okButton = this._element.querySelectorAll(`.modal__btn`)[0];

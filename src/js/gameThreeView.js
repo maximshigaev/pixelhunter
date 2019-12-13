@@ -1,12 +1,8 @@
-import showScreen from "./showScreen.js";
-import { answers, QUESTIONS } from "./data.js";
+import { answers, QUESTIONS, gameState } from "./data.js";
 import AbstractView from "./abstractView.js";
-import GameOneView from "./gameOneView.js";
-import HeaderView from "./headerView.js";
-import StatsView from "./statsView.js";
 
 class GameThreeView extends AbstractView {
-	constructor(gameState) {
+	constructor() {
 		super();
 		this.gameState = gameState;
 	}
@@ -30,38 +26,7 @@ class GameThreeView extends AbstractView {
 			</section>`;
 	}
 
-	onClick(e) {
-		const gameOneView = new GameOneView(this.gameState);
-		const headerView = new HeaderView(this.gameState);
-		const questionOptions = this._element.querySelectorAll(`.game__option`);
-		const currentQuestion = this.gameState[`question`];
-		const MINIMUM_LIVES_NUMBER = 0;
-		let questionAnswer = null;
-
-		questionOptions.forEach((option, index) => {
-			if (option === e.currentTarget) {
-				questionAnswer = index;
-			}
-		});
-
-		if (QUESTIONS[currentQuestion - 1][`rightAnswers`][0] !== questionAnswer) {
-			answers[currentQuestion - 1] = `wrong`;
-			this.gameState[`lives`]--;
-		} else {
-			answers[currentQuestion - 1] = `correct`;
-		}
-
-		if (this.gameState[`lives`] < MINIMUM_LIVES_NUMBER) {
-			const statsView = new StatsView();
-
-			showScreen(statsView.element);
-		} else {
-			this.gameState[`question`]++;
-
-			showScreen(gameOneView.element);
-			showScreen(headerView.element);
-		}
-	}
+	onClick() { }
 
 	bind() {
 		const gameThreeOptions = this._element.querySelectorAll(`.game__option`);
