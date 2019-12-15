@@ -1,16 +1,13 @@
-import GameTwoView from "./gameTwoView.js";
 import showScreen from "./showScreen.js";
-import { answers, QUESTIONS } from "./data.js";
-import controlGameThreeScreen from "./gameThreePresenter.js";
-import controlStatsScreen from "./statsPresenter.js";
-import controlHeaderScreen from "./headerPresenter.js";
+import Application from "./application.js";
+import getAnswerType from "./getAnswerType.js";
+import startTimer from "./startTimer.js";
+import subtractLife from "./subtractLife.js";
 
-function controlGameTwoScreen() {
-	const gameTwoView = new GameTwoView();
-
+function updateGameTwoScreen(gameTwoView) {
 	gameTwoView.onChange = function() {
 		const questionInputs = this._element.querySelectorAll(`input`);
-		const currentQuestion = this.gameState[`question`];
+		const currentQuestion = this.gameModel[`gameState`][`question`];
 		const MINIMUM_LIVES_NUMBER = 0;
 		let questionAnswer = null;
 
@@ -20,24 +17,24 @@ function controlGameTwoScreen() {
 			}
 		});
 
-		if (QUESTIONS[currentQuestion - 1][`rightAnswers`][0] !== questionAnswer) {
-			answers[currentQuestion - 1] = `wrong`;
-			this.gameState[`lives`]--;
+		if (this.gameModel[`questions`][currentQuestion - 1][`rightAnswers`][0] !== questionAnswer) {
+			subtractLife();
 		} else {
-			answers[currentQuestion - 1] = `correct`;
+			this.gameModel[`answers`][currentQuestion - 1] = getAnswerType(this.gameModel[`gameState`][`time`]);
 		}
 
-		if (this.gameState[`lives`] < MINIMUM_LIVES_NUMBER) {
-			controlStatsScreen();
+		if (this.gameModel[`gameState`][`lives`] < MINIMUM_LIVES_NUMBER) {
+			Application.showHeader();
+			Application.showStats();
 		} else {
-			this.gameState[`question`]++;
+			this.gameModel[`gameState`][`question`]++;
 
-			controlGameThreeScreen();
-			controlHeaderScreen();
+			Application.showGameThree();
+			startTimer();
 		}
 	};
 
 	showScreen(gameTwoView.element);
 }
 
-export default controlGameTwoScreen;
+export default updateGameTwoScreen;

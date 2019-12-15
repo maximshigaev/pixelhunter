@@ -1,17 +1,14 @@
 import showScreen from "./showScreen.js";
-import ModalView from "./modalView.js";
-import { answers, gameState } from "./data.js";
-import controlGreetingScreen from "./greetingPresenter.js";
+import Application from "./application.js";
+import { gameModel } from "./main.js";
 
-function controlModalScreen() {
-	const modalView = new ModalView();
-
+function updateModalScreen(modalView) {
 	modalView.onOkClick = function() {
-		answers.fill(`unknown`);
-		gameState.question = 1;
-		gameState.lives = 3;
+		gameModel[`answers`].fill(`unknown`);
+		gameModel[`gameState`][`question`] = 1;
+		gameModel[`gameState`][`lives`] = 3;
 
-		controlGreetingScreen();
+		Application.showGreeting();
 	};
 
 	modalView.onCancelClick = function() {
@@ -21,4 +18,4 @@ function controlModalScreen() {
 	showScreen(modalView.element);
 }
 
-export default controlModalScreen;
+export default updateModalScreen;

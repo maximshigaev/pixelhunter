@@ -1,23 +1,27 @@
-import showScreen from "./showScreen.js";
 import AbstractView from "./abstractView.js";
-import GreetingView from "./greetingView.js";
-import ModalView from "./modalView.js";
-import { gameState } from "./data.js";
 
 class HeaderView extends AbstractView {
-	constructor() {
+	constructor(gameModel, isGameHeader = false) {
 		super();
-		this.gameState = gameState;
+		this.gameModel = gameModel;
+		this.isGameHeader = isGameHeader;
 	}
 
 	get template() {
 		const INITIAL_LIVES_NUMBER = 3;
 
-		if (document.querySelector(`#main`).firstElementChild.classList.contains(`result`)
-			|| document.querySelector(`#main`).firstElementChild.classList.contains(`rules`)) {
+		if (!this.isGameHeader) {
 			const header = document.querySelector(`#rules`).content.cloneNode(true).firstElementChild;
 
 			return header.outerHTML;
+		} else if (this.isGameHeader === `fade`) {
+			return `<header class="header fade">
+			<button class="back">
+				<span class="visually-hidden">Вернуться к началу</span>
+				<img src="img/sprite/arrow-left.svg">
+				<img src="img/sprite/logo-small.svg">
+			</button>
+		</header>`;
 		}
 
 		return `<header class="header">
@@ -26,33 +30,19 @@ class HeaderView extends AbstractView {
 				<img src="img/sprite/arrow-left.svg">
 				<img src="img/sprite/logo-small.svg">
 			</button>
-			<div class="game__timer">${this.gameState[`time`]}</div>
+			<div class="game__timer">${this.gameModel[`gameState`][`time`]}</div>
 			<div class="game__lives">
-			${new Array(INITIAL_LIVES_NUMBER - this.gameState[`lives`])
+			${new Array(INITIAL_LIVES_NUMBER - this.gameModel[`gameState`][`lives`])
 		.fill(`<img src="img/heart__empty.svg" class="game__heart" alt=" Missed Life" width="31" height="27"></img>`)
 		.join(` `)}
-				${new Array(this.gameState[`lives`])
+				${new Array(this.gameModel[`gameState`][`lives`])
 		.fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27"></img>`)
 		.join(` `)}
 			</div>
 		</header>`;
 	}
 
-	onClick() {
-		const mainContent = document.querySelector(`#main`);
-
-		if (mainContent.children[1].classList.contains(`rules`) || mainContent.children[1].classList.contains(`result`)) {
-			const greetingView = new GreetingView();
-
-			mainContent.innerHTML = ``;
-
-			showScreen(greetingView.element);
-		} else {
-			const modalView = new ModalView();
-
-			showScreen(modalView.element);
-		}
-	}
+	onClick() { }
 
 	bind() {
 		const backButton = this._element.querySelector(`.back`);

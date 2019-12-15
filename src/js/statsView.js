@@ -1,10 +1,10 @@
 import AbstractView from "./abstractView.js";
-import { answers } from "./data.js";
 
 class StatsView extends AbstractView {
-	constructor(stats = false) {
+	constructor(gameModel, stats = false) {
 		super();
 		this.stats = stats;
+		this.gameModel = gameModel;
 	}
 
 	get template() {
@@ -15,7 +15,7 @@ class StatsView extends AbstractView {
 					<tr>
 						<td class="result__number">1.</td>
 						<td colspan="2">
-							<ul class="stats">${answers.map((answer) => `<li class="stats__result stats__result--${answer}"></li>`).join(``)}
+							<ul class="stats">${this.gameModel[`answers`].map((answer) => `<li class="stats__result stats__result--${answer}"></li>`).join(``)}
 							</ul>
 						</td>
 						<td class="result__points">× 100</td>
@@ -53,7 +53,7 @@ class StatsView extends AbstractView {
 			<tr>
 				<td class="result__number">2.</td>
 				<td>
-					<ul class="stats">${answers.map((answer) => `<li class="stats__result stats__result--${answer}"></li>`).join(``)}
+					<ul class="stats">${this.gameModel[`answers`].map((answer) => `<li class="stats__result stats__result--${answer}"></li>`).join(``)}
 					</ul>
 				</td>
 				<td class="result__total"></td>

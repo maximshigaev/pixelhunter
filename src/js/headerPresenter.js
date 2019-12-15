@@ -1,29 +1,25 @@
 import showScreen from "./showScreen.js";
-import controlGreetingScreen from "./greetingPresenter";
-import controlModalScreen from "./modalPresenter.js";
-import HeaderView from "./headerView.js";
-import { answers, gameState } from "./data.js";
+import Application from "./application.js";
 
-function controlHeaderScreen() {
-	const headerView = new HeaderView();
-
+function updateHeaderScreen(headerView) {
 	headerView.onClick = function() {
 		const mainContent = document.querySelector(`#main`);
 
 		if (mainContent.children[1].classList.contains(`rules`)) {
-			controlGreetingScreen();
-		} else if (mainContent.children[1].classList.contains(`result`)) {
-			answers.fill(`unknown`);
-			gameState.question = 1;
-			gameState.lives = 3;
+			mainContent.innerHTML = ``;
+			Application.showGreeting();
+		} else if (mainContent.children[1].classList.contains(`result`) || mainContent.children[1].classList.contains(`result__table`)) {
+			this.gameModel[`answers`].fill(`unknown`);
+			this.gameModel[`gameState`][`question`] = 1;
+			this.gameModel[`gameState`][`lives`] = 3;
 
-			controlGreetingScreen();
+			Application.showGreeting();
 		} else {
-			controlModalScreen();
+			Application.showModal();
 		}
 	};
 
 	showScreen(headerView.element);
 }
 
-export default controlHeaderScreen;
+export default updateHeaderScreen;

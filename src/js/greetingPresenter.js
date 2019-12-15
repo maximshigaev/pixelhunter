@@ -1,15 +1,12 @@
-import GreetingView from "./greetingView.js";
 import showScreen from "./showScreen.js";
-import controlRulesScreen from "./rulesPresenter.js";
+import Application from "./application.js";
 
-function controlGreetingScreen() {
-	const greetingView = new GreetingView();
-
+function updateGreetingScreen(greetingView) {
 	greetingView.onClick = function() {
-		controlRulesScreen();
+		Application.showRules();
 	};
 
 	showScreen(greetingView.element);
 }
 
-export default controlGreetingScreen;
+export default updateGreetingScreen;

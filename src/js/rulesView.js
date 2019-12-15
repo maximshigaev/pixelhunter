@@ -1,10 +1,8 @@
-import { gameState } from "./data.js";
 import AbstractView from "./abstractView";
 
 class RulesView extends AbstractView {
 	constructor() {
 		super();
-		this.gameState = Object.assign({}, gameState);
 	}
 
 	get template() {

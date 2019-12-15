@@ -1,16 +1,11 @@
-import StatsView from "./statsView.js";
 import showScreen from "./showScreen.js";
 
-function controlStatsScreen(stats) {
+function updateStatsScreen(statsView, stats) {
 	if (!stats) {
-		const statsView = new StatsView();
-
 		showScreen(statsView.element);
 	} else {
-		const statsView = new StatsView(stats);
-
 		showScreen(statsView.element);
 	}
 }
 
-export default controlStatsScreen;
+export default updateStatsScreen;

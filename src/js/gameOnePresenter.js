@@ -1,18 +1,15 @@
-import GameOneView from "./gameOneView.js";
 import showScreen from "./showScreen.js";
-import { answers, QUESTIONS } from "./data.js";
 import calculatePoints from "./calculatePoints.js";
-import controlGameTwoScreen from "./gameTwoPresenter.js";
-import controlStatsScreen from "./statsPresenter.js";
-import controlHeaderScreen from "./headerPresenter.js";
+import Application from "./application.js";
+import getAnswerType from "./getAnswerType.js";
+import startTimer from "./startTimer.js";
+import subtractLife from "./subtractLife.js";
 
-function controlGameOneScreen() {
-	const gameOneView = new GameOneView();
-
+function updateGameOneScreen(gameOneView) {
 	gameOneView.onChange = function() {
 		const TOTAL_QUESTIONS_NUMBER = 10;
 		const MINIMUM_LIVES_NUMBER = 0;
-		const currentQuestion = this.gameState[`question`];
+		const currentQuestion = this.gameModel[`gameState`][`question`];
 		const firstQuestionInputs = this._element.querySelectorAll(`.game__option`)[0].querySelectorAll(`input`);
 		const secondQuestionInputs = this._element.querySelectorAll(`.game__option`)[1].querySelectorAll(`input`);
 		const isFirstChecked = firstQuestionInputs[0].checked || firstQuestionInputs[1].checked;
@@ -34,30 +31,28 @@ function controlGameOneScreen() {
 				}
 			});
 
-			const isFirstTrue = (QUESTIONS[currentQuestion - 1][`rightAnswers`][0] === firstQuestionAnswer)
-				? true : false;
-			const isSecondTrue = (QUESTIONS[currentQuestion - 1][`rightAnswers`][1] === secondQuestionAnswer)
-				? true : false;
+			const isFirstTrue = (this.gameModel[`questions`][currentQuestion - 1][`rightAnswers`][0] === firstQuestionAnswer);
+			const isSecondTrue = (this.gameModel[`questions`][currentQuestion - 1][`rightAnswers`][1] === secondQuestionAnswer);
 
 			if (isFirstTrue && isSecondTrue) {
-				answers[currentQuestion - 1] = `correct`;
+				this.gameModel[`answers`][currentQuestion - 1] = getAnswerType(this.gameModel[`gameState`][`time`]);
 			} else {
-				answers[currentQuestion - 1] = `wrong`;
-				this.gameState[`lives`]--;
+				subtractLife();
 			}
 
-			if (this.gameState[`lives`] < MINIMUM_LIVES_NUMBER) {
-				controlStatsScreen();
-			} else if (this.gameState[`question`] === TOTAL_QUESTIONS_NUMBER) {
-				const stats = calculatePoints(answers, this.gameState[`lives`]);
+			if (this.gameModel[`gameState`][`lives`] < MINIMUM_LIVES_NUMBER) {
+				Application.showHeader();
+				Application.showStats();
+			} else if (this.gameModel[`gameState`][`question`] === TOTAL_QUESTIONS_NUMBER) {
+				const stats = calculatePoints(this.gameModel[`answers`], this.gameModel[`gameState`][`lives`]);
 
-				controlStatsScreen(stats);
-				controlHeaderScreen();
+				Application.showHeader();
+				Application.showStats(stats);
 			} else {
-				this.gameState[`question`]++;
+				this.gameModel[`gameState`][`question`]++;
 
-				controlGameTwoScreen();
-				controlHeaderScreen();
+				Application.showGameTwo();
+				startTimer();
 			}
 		}
 	};
@@ -65,4 +60,4 @@ function controlGameOneScreen() {
 	showScreen(gameOneView.element);
 }
 
-export default controlGameOneScreen;
+export default updateGameOneScreen;

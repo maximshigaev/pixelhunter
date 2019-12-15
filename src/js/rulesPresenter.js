@@ -1,30 +1,29 @@
-import RulesView from "./rulesView.js";
 import showScreen from "./showScreen.js";
-import controlGameOneScreen from "./gameOnePresenter.js";
-import controlHeaderScreen from "./headerPresenter.js";
+import Application from "./application.js";
+import startTimer from "./startTimer.js";
 
-function controlRulesScreen() {
-	const rulesView = new RulesView();
+function updateRulesScreen(rulesView) {
 	const FADE_TIMEOUT = 2000;
 
 	rulesView.onClick = function() {
-		controlGameOneScreen();
-		controlHeaderScreen();
+		Application.showHeader(true);
+		Application.showGameOne();
+		startTimer();
 	};
 
 	rulesView.onInput = function() {
 		const nameFormButton = this._element.querySelector(`.rules__button`);
 		const nameForm = this._element.querySelector(`.rules__input`);
 
-		nameFormButton.disabled = nameForm.value ? false : true;
+		nameFormButton.disabled = !nameForm.value;
 	};
 
 	$(`.greeting`).fadeOut(FADE_TIMEOUT);
 
 	setTimeout(() => {
+		Application.showHeader(`fade`);
 		showScreen(rulesView.element);
-		controlHeaderScreen();
 	}, FADE_TIMEOUT);
 }
 
-export default controlRulesScreen;
+export default updateRulesScreen;
