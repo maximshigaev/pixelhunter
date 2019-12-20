@@ -1,5 +1,5 @@
 {
-    "parserOptions": { "ecmaVersion": 6, "sourceType": "module" },
+    "parserOptions": { "ecmaVersion": 2018, "sourceType": "module" },
     "env": { "es6": true, "commonjs": true, "mocha": true, "browser": true },
     "extends": "htmlacademy/es6",
     "rules":

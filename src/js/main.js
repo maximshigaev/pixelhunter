@@ -1,8 +1,9 @@
 import Application from "./application.js";
-import GameModel from "./gameModel.js";
-import { answers, gameState, QUESTIONS } from "./data.js";
+import { loadData } from "./backend.js";
 
 function main() {
+	loadData();
+
 	const introAsterisk = document.querySelector(`.intro__asterisk`);
 
 	introAsterisk.addEventListener(`click`, function() {
@@ -10,6 +11,4 @@ function main() {
 	});
 }
 
-const gameModel = new GameModel(gameState, answers, QUESTIONS);
-
-export { main, gameModel };
+export default main;

@@ -1,8 +1,9 @@
 class GameModel {
-	constructor(gameState, answers, questions) {
+	constructor(gameState, answers, questions, isDebugMode) {
 		this.gameState = gameState;
 		this.answers = answers;
 		this.questions = questions;
+		this.isDebugMode = isDebugMode;
 	}
 }
 

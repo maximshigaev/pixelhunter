@@ -1,11 +1,14 @@
 import showScreen from "./showScreen.js";
 import Application from "./application.js";
 import getAnswerType from "./getAnswerType.js";
-import startTimer from "./startTimer.js";
+import { startTimer, stopTimer } from "./timer.js";
 import subtractLife from "./subtractLife.js";
+import calculatePoints from "./calculatePoints.js";
+import { sendData } from "./backend.js";
 
 function updateGameTwoScreen(gameTwoView) {
 	gameTwoView.onChange = function() {
+		const TOTAL_QUESTIONS_NUMBER = 10;
 		const questionInputs = this._element.querySelectorAll(`input`);
 		const currentQuestion = this.gameModel[`gameState`][`question`];
 		const MINIMUM_LIVES_NUMBER = 0;
@@ -24,12 +27,21 @@ function updateGameTwoScreen(gameTwoView) {
 		}
 
 		if (this.gameModel[`gameState`][`lives`] < MINIMUM_LIVES_NUMBER) {
+			sendData(this.gameModel[`answers`]);
+
 			Application.showHeader();
 			Application.showStats();
+			stopTimer();
+		} else if (this.gameModel[`gameState`][`question`] === TOTAL_QUESTIONS_NUMBER) {
+			const stats = calculatePoints(this.gameModel[`answers`], this.gameModel[`gameState`][`lives`]);
+			sendData(this.gameModel[`answers`]);
+
+			Application.showHeader();
+			Application.showStats(stats);
+			stopTimer();
 		} else {
 			this.gameModel[`gameState`][`question`]++;
-
-			Application.showGameThree();
+			Application.updateGame();
 			startTimer();
 		}
 	};

@@ -1,13 +1,13 @@
 import showScreen from "./showScreen.js";
 import Application from "./application.js";
-import startTimer from "./startTimer.js";
+import { startTimer } from "./timer.js";
 
 function updateRulesScreen(rulesView) {
 	const FADE_TIMEOUT = 2000;
 
 	rulesView.onClick = function() {
 		Application.showHeader(true);
-		Application.showGameOne();
+		Application.updateGame();
 		startTimer();
 	};
 

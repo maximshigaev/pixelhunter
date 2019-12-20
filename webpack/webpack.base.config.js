@@ -36,16 +36,16 @@ module.exports = {
 			// 		loader: "eslint-loader"
 			// 	}
 			// },
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				use: {
-					loader: "babel-loader",
-					options: {
-						presets: ["env", "stage-0"]
-					}
-				}
-			},
+			// {
+			// 	test: /\.js$/,
+			// 	exclude: /node_modules/,
+			// 	use: {
+			// 		loader: "babel-loader",
+			// 		options: {
+			// 			presets: ["env", "stage-0"]
+			// 		}
+			// 	}
+			// },
 			{
 				test: /\.scss$/,
 				use: [

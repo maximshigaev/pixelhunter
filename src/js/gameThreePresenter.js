@@ -1,11 +1,14 @@
 import showScreen from "./showScreen.js";
 import Application from "./application.js";
 import getAnswerType from "./getAnswerType.js";
-import startTimer from "./startTimer.js";
+import { startTimer, stopTimer } from "./timer.js";
 import subtractLife from "./subtractLife.js";
+import calculatePoints from "./calculatePoints.js";
+import { sendData } from "./backend.js";
 
 function updateGameThreeScreen(gameThreeView) {
 	gameThreeView.onClick = function(e) {
+		const TOTAL_QUESTIONS_NUMBER = 10;
 		const questionOptions = this._element.querySelectorAll(`.game__option`);
 		const currentQuestion = this.gameModel[`gameState`][`question`];
 		const MINIMUM_LIVES_NUMBER = 0;
@@ -24,12 +27,21 @@ function updateGameThreeScreen(gameThreeView) {
 		}
 
 		if (this.gameModel[`gameState`][`lives`] < MINIMUM_LIVES_NUMBER) {
+			sendData(this.gameModel[`answers`]);
+
 			Application.showHeader();
 			Application.showStats();
+			stopTimer();
+		} else if (this.gameModel[`gameState`][`question`] === TOTAL_QUESTIONS_NUMBER) {
+			const stats = calculatePoints(this.gameModel[`answers`], this.gameModel[`gameState`][`lives`]);
+			sendData(this.gameModel[`answers`]);
+
+			Application.showHeader();
+			Application.showStats(stats);
+			stopTimer();
 		} else {
 			this.gameModel[`gameState`][`question`]++;
-
-			Application.showGameOne();
+			Application.updateGame();
 			startTimer();
 		}
 	};

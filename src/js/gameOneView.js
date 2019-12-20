@@ -8,7 +8,7 @@ class GameOneView extends AbstractView {
 
 	get template() {
 		return `<section class="game">
-			<p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
+			<p class="game__task">${this.gameModel[`questions`][this.gameModel[`gameState`][`question`] - 1][`text`]}</p>
 			<form class="game__content">
 				<div class="game__option">
 					<img src=${this.gameModel[`questions`][this.gameModel[`gameState`][`question`] - 1][`imageSources`][0]} alt="Option 1" width="468" height="458">

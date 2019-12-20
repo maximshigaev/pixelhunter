@@ -1,7 +1,8 @@
 import Application from "./application.js";
 import calculatePoints from "./calculatePoints.js";
-import { gameModel } from "./main.js";
+import { gameModel } from "./data.js";
 import subtractLife from "./subtractLife.js";
+import { sendData } from "./backend.js";
 
 const START_TIME = 30;
 let timer = null;
@@ -16,17 +17,6 @@ function startTimer() {
 	const LOSE_TIME = 0;
 	const timeElement = document.querySelector(`.game__timer`);
 
-	function stopTimer() {
-		clearInterval(timer);
-
-		currentTime = START_TIME;
-		gameModel[`gameState`][`time`] = START_TIME;
-
-		if (timeElement) {
-			timeElement.innerHTML = START_TIME;
-		}
-	}
-
 	if (timer) {
 		stopTimer();
 	}
@@ -34,10 +24,15 @@ function startTimer() {
 	timer = setInterval(() => {
 		currentTime--;
 		gameModel[`gameState`][`time`] = currentTime;
-		timeElement.innerHTML = currentTime;
+		if (timeElement) {
+			timeElement.style.color = ``;
+			timeElement.innerHTML = currentTime;
+		}
 
 		if (currentTime < FLICKER_TIME) {
-			timeElement.style.color = `red`;
+			if (timeElement) {
+				timeElement.style.color = `red`;
+			}
 
 			$(`.game__timer`).fadeOut(FADE_TIMEOUT);
 			$(`.game__timer`).fadeIn(FADE_TIMEOUT);
@@ -50,10 +45,13 @@ function startTimer() {
 			subtractLife();
 
 			if (gameModel[`gameState`][`lives`] < MINIMUM_LIVES_NUMBER) {
+				sendData(gameModel[`answers`]);
+
 				Application.showHeader();
 				Application.showStats();
 			} else if (gameModel[`gameState`][`question`] === TOTAL_QUESTIONS_NUMBER) {
 				const stats = calculatePoints(gameModel[`answers`], gameModel[`gameState`][`lives`]);
+				sendData(gameModel[`answers`]);
 
 				Application.showHeader();
 				Application.showStats(stats);
@@ -63,23 +61,31 @@ function startTimer() {
 
 					Application.showGameTwo();
 					startTimer();
-					timeElement.style.color = ``;
 				} else if (gameModel[`gameState`][`question`] % 3 === 2 || gameModel[`gameState`][`question`] === 2) {
 					gameModel[`gameState`][`question`]++;
 
 					Application.showGameThree();
 					startTimer();
-					timeElement.style.color = ``;
 				} else {
 					gameModel[`gameState`][`question`]++;
 
 					Application.showGameOne();
 					startTimer();
-					timeElement.style.color = ``;
 				}
 			}
 		}
 	}, INTERVAL);
 }
 
-export default startTimer;
+function stopTimer() {
+	clearInterval(timer);
+
+	currentTime = START_TIME;
+	gameModel[`gameState`][`time`] = START_TIME;
+
+	if (document.querySelector(`.game__timer`)) {
+		document.querySelector(`.game__timer`).innerHTML = START_TIME;
+	}
+}
+
+export { startTimer, stopTimer };

@@ -1,4 +1,4 @@
-import { gameModel } from "./main.js";
+import { gameModel } from "./data.js";
 
 function subtractLife() {
 	const lives = document.querySelector(`.game__lives`);
@@ -9,7 +9,7 @@ function subtractLife() {
 	gameModel[`answers`][currentQuestion - 1] = `wrong`;
 	gameModel[`gameState`][`lives`]--;
 
-	if (gameModel[`gameState`][`lives`] > -1) {
+	if (gameModel[`gameState`][`lives`] > -1 && lives) {
 		lives.innerHTML = `${new Array(INITIAL_LIVES_NUMBER - gameModel[`gameState`][`lives`])
 			.fill(`<img src="img/heart__empty.svg" class="game__heart" alt=" Missed Life" width="31" height="27"></img>`)
 			.join(` `)} ${new Array(gameModel[`gameState`][`lives`])

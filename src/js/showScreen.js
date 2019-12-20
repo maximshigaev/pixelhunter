@@ -1,4 +1,20 @@
+import { gameModel } from "./data.js";
+
 function showScreen(screenElement) {
+	if (gameModel[`isDebugMode`] && !screenElement.classList.contains(`header`)
+		&& !screenElement.classList.contains(`greeting`) && !screenElement.classList.contains(`rules`)
+		&& !screenElement.classList.contains(`result`)) {
+		let hint = document.querySelector(`.hint`);
+
+		if (!hint) {
+			hint = document.createElement(`div`);
+			hint.classList.add(`hint`);
+			document.body.append(hint);
+		}
+
+		hint.innerHTML = [gameModel[`questions`][gameModel[`gameState`][`question`] - 1][`rightAnswers`]];
+	}
+
 	const mainContent = document.querySelector(`#main`);
 
 	if (!screenElement.classList.contains(`header`) && !screenElement.classList.contains(`greeting`)) {
@@ -24,6 +40,14 @@ function showScreen(screenElement) {
 	}
 
 	mainContent.append(screenElement);
+
+	if (screenElement.classList.contains(`result`) || screenElement.classList.contains(`result__table`)) {
+		const loadingElement = document.createElement(`div`);
+
+		loadingElement.classList.add(`loading`);
+		loadingElement.innerHTML = `Подождите, данные о предыдущих попытках загружаются с сервера`;
+		mainContent.append(loadingElement);
+	}
 }
 
 export default showScreen;

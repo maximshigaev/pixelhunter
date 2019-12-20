@@ -59,8 +59,7 @@ class StatsView extends AbstractView {
 				<td class="result__total"></td>
 				<td class="result__total  result__total--final">fail</td>
 			</tr>
-			</table>
-			<table class="result__table">`;
+			</table>`;
 	}
 }
 

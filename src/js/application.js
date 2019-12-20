@@ -1,4 +1,4 @@
-import updateGreetingScreen from "./greetingPresenter";
+import updateGreetingScreen from "./greetingPresenter.js";
 import updateModalScreen from "./modalPresenter.js";
 import updateGameTwoScreen from "./gameTwoPresenter.js";
 import updateStatsScreen from "./statsPresenter.js";
@@ -14,10 +14,26 @@ import GameOneView from "./gameOneView.js";
 import GameTwoView from "./gameTwoView.js";
 import GameThreeView from "./gameThreeView.js";
 import ModalView from "./modalView.js";
-import { gameModel } from "./main.js";
+import { gameModel } from "./data.js";
+import ErrorView from "./errorView.js";
+import updateErrorScreen from "./errorPresenter.js";
 
 class Application {
 	constructor() { }
+
+	static updateGame() {
+		switch (gameModel[`questions`][gameModel[`gameState`][`question`] - 1][`imageSources`].length) {
+		case 1:
+			this.showGameTwo();
+			break;
+		case 2:
+			this.showGameOne();
+			break;
+		case 3:
+			this.showGameThree();
+			break;
+		}
+	}
 
 	static showGreeting() {
 		updateGreetingScreen(new GreetingView());
@@ -25,6 +41,10 @@ class Application {
 
 	static showRules() {
 		updateRulesScreen(new RulesView());
+	}
+
+	static showError(message) {
+		updateErrorScreen(new ErrorView(message));
 	}
 
 	static showGameOne() {

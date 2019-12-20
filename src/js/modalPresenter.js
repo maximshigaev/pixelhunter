@@ -1,6 +1,6 @@
 import showScreen from "./showScreen.js";
 import Application from "./application.js";
-import { gameModel } from "./main.js";
+import { gameModel } from "./data.js";
 
 function updateModalScreen(modalView) {
 	modalView.onOkClick = function() {
