@@ -6,9 +6,7 @@ class ModalView extends AbstractView {
 	}
 
 	get template() {
-		const modalConfirm = document.querySelector(`#modal-confirm`).content.cloneNode(true).firstElementChild;
-
-		return modalConfirm.outerHTML;
+		return document.querySelector(`#modal-confirm`).content.cloneNode(true).firstElementChild.outerHTML;
 	}
 
 	onOkClick() { }

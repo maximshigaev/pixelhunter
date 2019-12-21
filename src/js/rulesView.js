@@ -6,9 +6,7 @@ class RulesView extends AbstractView {
 	}
 
 	get template() {
-		const rules = document.querySelector(`#rules`).content.cloneNode(true).children[1];
-
-		return rules.outerHTML;
+		return document.querySelector(`#rules`).content.cloneNode(true).children[1].outerHTML;
 	}
 
 	onInput() { }

@@ -16,12 +16,12 @@ class HeaderView extends AbstractView {
 			return header.outerHTML;
 		} else if (this.isGameHeader === `fade`) {
 			return `<header class="header fade">
-			<button class="back">
-				<span class="visually-hidden">Вернуться к началу</span>
-				<img src="img/sprite/arrow-left.svg">
-				<img src="img/sprite/logo-small.svg">
-			</button>
-		</header>`;
+				<button class="back">
+					<span class="visually-hidden">Вернуться к началу</span>
+					<img src="img/sprite/arrow-left.svg">
+					<img src="img/sprite/logo-small.svg">
+				</button>
+				</header>`;
 		}
 
 		return `<header class="header">

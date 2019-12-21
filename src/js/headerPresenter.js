@@ -9,10 +9,6 @@ function updateHeaderScreen(headerView) {
 			mainContent.innerHTML = ``;
 			Application.showGreeting();
 		} else if (mainContent.children[1].classList.contains(`result`) || mainContent.children[1].classList.contains(`result__table`)) {
-			if (document.querySelector(`.hint`)) {
-				document.querySelector(`.hint`).remove();
-			}
-
 			this.gameModel[`answers`].fill(`unknown`);
 			this.gameModel[`gameState`][`question`] = 1;
 			this.gameModel[`gameState`][`lives`] = 3;

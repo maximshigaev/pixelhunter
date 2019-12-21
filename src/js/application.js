@@ -60,7 +60,7 @@ class Application {
 	}
 
 	static showStats(stats) {
-		updateStatsScreen(new StatsView(gameModel, stats), stats);
+		updateStatsScreen(new StatsView(gameModel, stats));
 	}
 
 	static showHeader(isGameHeader) {

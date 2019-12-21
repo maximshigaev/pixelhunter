@@ -24,7 +24,7 @@ class GameTwoView extends AbstractView {
 			</form>
 			<ul class="stats">${this.gameModel[`answers`].map((answer) => `<li class="stats__result stats__result--${answer}"></li>`).join(``)}
 			</ul>
-		</section>`;
+			</section>`;
 	}
 
 	onChange() { }

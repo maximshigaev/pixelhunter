@@ -3,7 +3,6 @@ import { gameModel } from "./data.js";
 function subtractLife() {
 	const lives = document.querySelector(`.game__lives`);
 	const INITIAL_LIVES_NUMBER = 3;
-
 	const currentQuestion = gameModel[`gameState`][`question`];
 
 	gameModel[`answers`][currentQuestion - 1] = `wrong`;

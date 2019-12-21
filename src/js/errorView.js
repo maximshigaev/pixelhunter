@@ -12,7 +12,7 @@ class ErrorView extends AbstractView {
 				<h2 class="modal__title">Произошла ошибка!</h2>
 				<p class="modal__text modal__text--error">${this.message}.Пожалуйста, перезагрузите страницу</p>
 			</div>
-		</section>`;
+			</section>`;
 	}
 }
 

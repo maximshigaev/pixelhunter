@@ -39,9 +39,7 @@ function startTimer() {
 		}
 
 		if (currentTime === LOSE_TIME) {
-
 			stopTimer();
-
 			subtractLife();
 
 			if (gameModel[`gameState`][`lives`] < MINIMUM_LIVES_NUMBER) {

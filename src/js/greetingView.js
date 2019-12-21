@@ -6,9 +6,7 @@ class GreetingView extends AbstractView {
 	}
 
 	get template() {
-		const greeting = document.querySelector(`#greeting`).content.cloneNode(true);
-
-		return greeting.firstElementChild.outerHTML;
+		return document.querySelector(`#greeting`).content.cloneNode(true).firstElementChild.outerHTML;
 	}
 
 	onClick() { }

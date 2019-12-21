@@ -1,9 +1,9 @@
 import { gameModel } from "./data.js";
 
 function showScreen(screenElement) {
-	if (gameModel[`isDebugMode`] && !screenElement.classList.contains(`header`)
-		&& !screenElement.classList.contains(`greeting`) && !screenElement.classList.contains(`rules`)
-		&& !screenElement.classList.contains(`result`)) {
+	if (gameModel[`isDebugMode`] && !screenElement.classList.contains(`header`) && !screenElement.classList.contains(`greeting`)
+		&& !screenElement.classList.contains(`rules`) && !screenElement.classList.contains(`result`)
+		&& gameModel[`questions`].length) {
 		let hint = document.querySelector(`.hint`);
 
 		if (!hint) {
@@ -44,6 +44,7 @@ function showScreen(screenElement) {
 	if (screenElement.classList.contains(`result`) || screenElement.classList.contains(`result__table`)) {
 		const loadingElement = document.createElement(`div`);
 
+		document.querySelector(`.hint`).remove();
 		loadingElement.classList.add(`loading`);
 		loadingElement.innerHTML = `Подождите, данные о предыдущих попытках загружаются с сервера`;
 		mainContent.append(loadingElement);
